@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>tidy — clean a messy csv or excel sheet</title>
+<meta name="description" content="Drop in a messy spreadsheet and get back a clean one: duplicates, blank rows, phone formats and emails fixed, problems flagged. Runs in your browser, your file never leaves your device.">
+<link rel="canonical" href="https://alvinaayaz.github.io/tidy/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="tidy">
+<meta property="og:title" content="tidy — clean a messy csv or excel sheet">
+<meta property="og:description" content="Drop in a messy spreadsheet and get back a clean one: duplicates, blank rows, phone formats and emails fixed, problems flagged. Runs in your browser, your file never leaves your device.">
+<meta property="og:url" content="https://alvinaayaz.github.io/tidy/">
+<meta property="og:image" content="https://alvinaayaz.github.io/tidy/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="tidy: 15 messy rows in, 12 clean rows out, with problem rows flagged">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="tidy — clean a messy csv or excel sheet">
+<meta name="twitter:description" content="Drop in a messy spreadsheet and get back a clean one: duplicates, blank rows, phone formats and emails fixed, problems flagged. Runs in your browser, your file never leaves your device.">
+<meta name="twitter:image" content="https://alvinaayaz.github.io/tidy/og-image.png">
+<meta name="twitter:image:alt" content="tidy: 15 messy rows in, 12 clean rows out, with problem rows flagged">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#edf1ee;--ink:#17231c;--soft:#566559;--line:#17231c2e;--card:#f8faf8;--ok:#1f7a4d;--bad:#b3402a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101a14;--ink:#e5efe8;--soft:#93a69a;--line:#e5efe833;--card:#16241c;--ok:#5fd09a;--bad:#ff8a70}}
+:root[data-theme="dark"]{--bg:#101a14;--ink:#e5efe8;--soft:#93a69a;--line:#e5efe833;--card:#16241c;--ok:#5fd09a;--bad:#ff8a70}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 'Bricolage Grotesque',system-ui,sans-serif}
+main{max-width:820px;margin:0 auto;padding:36px 20px 80px}
+h1{font:800 clamp(40px,10vw,76px)/.95 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.04em;margin:0 0 10px}
+.sub{color:var(--soft);margin:0 0 26px;max-width:50ch}
+#drop{display:block;border:2px dashed var(--ink);border-radius:6px;padding:34px 18px;text-align:center;cursor:pointer;background:var(--card)}
+#drop.over{border-style:solid;background:var(--bg)}
+#drop:focus-within{outline:2px solid var(--ok);outline-offset:2px}
+#drop input{position:absolute;opacity:0;width:1px;height:1px}
+#drop b{font-weight:800;font-size:20px;display:block}
+#drop span{color:var(--soft)}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px 18px;margin:20px 0 6px}
+.opts label{display:flex;gap:9px;align-items:flex-start}
+.opts input{margin-top:5px;accent-color:var(--ok)}
+.cc{margin:6px 0 18px;color:var(--soft);font-size:15px}
+.cc input{width:70px;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:3px 8px}
+button{font:inherit;font-weight:600;cursor:pointer;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:4px;padding:11px 18px}
+button:focus-visible{outline:2px solid var(--ok);outline-offset:2px}
+button:disabled{opacity:.4;cursor:not-allowed}
+#res{display:none;margin-top:30px;border-top:2px solid var(--ink);padding-top:18px}
+.big{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}
+.big b{font:800 clamp(44px,11vw,84px)/1 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.04em}
+.big i{font-style:normal;color:var(--ok);font-weight:800}
+.big span{color:var(--soft)}
+ul{margin:12px 0 18px;padding-left:20px}
+li{margin:3px 0}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:4px;margin-bottom:16px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+th{background:var(--bg)}
+td.flag{color:var(--bad)}
+.note{color:var(--soft);font-size:14px;margin-top:22px}
+.cc select,.maplist select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:4px 8px}
+.maplist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 18px;margin:8px 0 18px}
+.maplist div{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding:4px 0}
+.maplist span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.stats{display:flex;gap:26px;flex-wrap:wrap;margin:16px 0}
+.stats b{display:block;font-weight:800;font-size:28px;line-height:1.1}
+.stats span{color:var(--soft);font-size:14px}
+</style>
+</head>
+<body>
+<main>
+<h1>tidy.</h1>
+<p class="sub">drop in a messy csv or excel sheet. get back a clean one, plus a plain list of everything that changed. your file never leaves your device. reads csv (comma, semicolon or tab) and excel.</p>
+
+<label id="drop"><input type="file" id="file" accept=".csv,.tsv,.txt,.xlsx,.xls,text/csv"><b>choose a csv or excel file</b><span>or drag it here</span></label>
+
+<div class="opts">
+<label><input type="checkbox" id="oTrim" checked> trim extra spaces and collapse doubles</label>
+<label><input type="checkbox" id="oBlank" checked> remove completely blank rows</label>
+<label><input type="checkbox" id="oDup" checked> remove duplicate rows (ignores upper/lower case)</label>
+<label><input type="checkbox" id="oPhone" checked> standardize phone numbers (in columns marked phone)</label>
+<label><input type="checkbox" id="oMail" checked> lowercase emails and flag invalid ones (in columns marked email)</label>
+</div>
+<div id="map" style="display:none"><h2>columns</h2><p class="cc">we guessed what each column is. fix any that are wrong.</p><div id="mapList" class="maplist"></div></div>
+<p class="cc">country for numbers that start with 0: <select id="ccSel" aria-label="country"><option value="+92">Pakistan +92</option><option value="+91">India +91</option><option value="+880">Bangladesh +880</option><option value="+44">United Kingdom +44</option><option value="+1">US / Canada +1</option><option value="+971">UAE +971</option><option value="+966">Saudi Arabia +966</option><option value="+61">Australia +61</option><option value="+49">Germany +49</option><option value="+90">Turkey +90</option><option value="+234">Nigeria +234</option><option value="other">other…</option></select> <input id="cc" value="+" style="display:none" aria-label="country code"></p>
+<button id="go" disabled>clean it</button>
+
+<div id="res" aria-live="polite">
+<div class="big"><b id="rBefore">0</b><span>rows in</span><i>→</i><b id="rAfter">0</b><span>rows out</span></div>
+<div class="stats" id="rStats"></div>
+<ul id="rLog"></ul>
+<p class="note" id="pvNote"></p>
+<div class="tw"><table id="rTab"></table></div>
+<button id="dl">download cleaned csv</button> <button id="dlx" style="background:transparent;color:var(--ink)">download as excel</button>
+<p class="note">rows with a problem we can't fix (like an email with no @) stay in the file and get a note in a new "needs_attention" column, so nothing is deleted behind your back unless it's blank or an exact duplicate.</p>
+</div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script>
+var raw=null,out=null,fname='data.csv',$=function(i){return document.getElementById(i)};
+
+function parse(t,dl){dl=dl||',';
+ t=t.replace(/^\uFEFF/,'');var rows=[],row=[],f='',q=false,i=0,c;
+ for(;i<t.length;i++){c=t[i];
+  if(q){if(c=='"'){if(t[i+1]=='"'){f+='"';i++}else q=false}else f+=c}
+  else if(c=='"')q=true;
+  else if(c==dl){row.push(f);f=''}
+  else if(c=='\n'||c=='\r'){if(c=='\r'&&t[i+1]=='\n')i++;row.push(f);rows.push(row);row=[];f=''}
+  else f+=c}
+ if(f!==''||row.length){row.push(f);rows.push(row)}
+ return rows;
+}
+function esc(v){v=String(v==null?'':v);return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
+function toCsv(rows){return rows.map(function(r){return r.map(esc).join(',')}).join('\r\n')}
+
+function detect(head,data){return head.map(function(h,i){
+ if(/e-?mail/i.test(h))return 'email';
+ var vals=data.map(function(r){return r[i]||''}).filter(Boolean);if(!vals.length)return 'text';
+ var ph=vals.filter(function(v){var n=v.replace(/\D/g,'').length;return n>=7&&n<=15&&/^[+\d\s()\-.\/]+$/.test(v)}).length;
+ if(/phone|mobile|\btel\b|contact|cell|whatsapp/i.test(h)&&vals.filter(function(v){return v.replace(/\D/g,'').length>=7}).length/vals.length>=.5)return 'phone';
+ if(!/\bid\b|zip|postal|code|ref|invoice|amount|price|qty|total|rating|date/i.test(h)&&vals.length>=2&&ph/vals.length>=.8)return 'phone';
+ return 'text'})}
+function clean(rows,o){
+ var nBlank=0,nDup=0;
+ var log=[],head=rows[0].slice(),data=rows.slice(1),before=data.length;
+ data=data.map(function(r){while(r.length<head.length)r.push('');return r});
+ if(o.trim){var n=0;data=data.map(function(r){return r.map(function(v){var t=v.replace(/\s+/g,' ').trim();if(t!==v)n++;return t})});if(n)log.push('trimmed spaces in '+n+' cells')}
+ if(o.blank){var b=data.length;data=data.filter(function(r){return r.some(function(v){return v.trim()!==''})});nBlank=b-data.length;if(nBlank)log.push('removed '+nBlank+' blank rows')}
+ var phoneCols=[],mailCols=[],types=o.types||detect(head,data);
+ types.forEach(function(t,i){if(t=='phone')phoneCols.push(i);if(t=='email')mailCols.push(i)});
+ var issues=data.map(function(){return[]});
+ if(o.phone&&phoneCols.length){var fixed=0,bad=0,cc=o.cc.replace(/\D/g,'');
+  data.forEach(function(r,ri){phoneCols.forEach(function(ci){var v=r[ci]||'';if(!v)return;
+   var sfx=phoneCols.length>1?' ('+head[ci]+')':'';
+   if(!/\d/.test(v)){issues[ri].push('not a phone number'+sfx);bad++;return}
+   if(/\d[\s)]*([\/,;&]|\bor\b)\s*[(+\d]/i.test(v)){issues[ri].push('multiple numbers in one cell'+sfx);bad++;return}
+   var d=v.replace(/[^\d+]/g,'');if(d.indexOf('00')==0)d='+'+d.slice(2);
+   var digits=d.replace(/\D/g,'');
+   if(d[0]=='+'){}else if(digits[0]=='0'){d='+'+cc+digits.slice(1)}else if(digits.indexOf(cc)==0&&digits.length>=10){d='+'+digits}else if(cc=='92'&&digits.length==10&&digits[0]=='3'){d='+92'+digits}else{d=digits}
+   var len=d.replace(/\D/g,'').length;
+   if(len<8||len>15||(d.indexOf('+92')==0&&len!==12)){issues[ri].push('check phone'+sfx);bad++}
+   if(d!==v){r[ci]=d;fixed++}})});
+  log.push('standardized '+fixed+' phone numbers in '+phoneCols.map(function(i){return '"'+head[i]+'"'}).join(', ')+(bad?'; '+bad+' look wrong and were flagged':''))}
+ else if(o.phone)log.push('no column is set to phone');
+ if(o.mail&&mailCols.length){var lc=0,inv=0;
+  data.forEach(function(r,ri){mailCols.forEach(function(ci){var v=r[ci]||'';if(!v)return;var l=v.toLowerCase();if(l!==v){r[ci]=l;lc++}
+   if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(l)){issues[ri].push('check email'+(mailCols.length>1?' ('+head[ci]+')':''));inv++}})});
+  log.push('lowercased '+lc+' emails'+(inv?'; flagged '+inv+' that look invalid':''))}
+ else if(o.mail)log.push('no column is set to email');
+ if(o.dup){var seen={},d0=data.length,keep=[],ki=[];
+  data.forEach(function(r,i){var k=r.map(function(v){return v.toLowerCase()}).join('\u0001');if(!seen[k]){seen[k]=1;keep.push(r);ki.push(issues[i])}});
+  data=keep;issues=ki;nDup=d0-data.length;if(nDup)log.push('removed '+nDup+' duplicate rows')}
+ if(issues.some(function(x){return x.length})){head.push('needs_attention');data.forEach(function(r,i){r.push(issues[i].join('; '))})}
+ if(!log.length)log.push('nothing needed fixing');
+ return{rows:[head].concat(data),log:log,before:before,after:data.length,blank:nBlank,dup:nDup,flagged:issues.filter(function(x){return x.length}).length};
+}
+
+function sniff(t){var l=t.split(/\r?\n/)[0]||'',best=',',n=-1;[[',','comma'],[';','semicolon'],['\t','tab']].forEach(function(x){var c=l.split(x[0]).length-1;if(c>n){n=c;best=x[0]}});return best}
+function ready(f,info){
+ if(!raw||raw.length<1||!raw[0].length){raw=null;$('drop').querySelector('b').textContent='that file looks empty';$('drop').querySelector('span').textContent='try another one';$('go').disabled=true;return}
+ $('drop').querySelector('b').textContent=f.name;
+ $('drop').querySelector('span').textContent=(raw.length-1)+' rows, '+raw[0].length+' columns'+(info?' ('+info+')':'');
+ $('go').disabled=raw.length<2;$('res').style.display='none';buildMap();
+}
+function buildMap(){
+ if(!raw||raw.length<2){$('map').style.display='none';return}
+ var head=raw[0],data=raw.slice(1).map(function(r){var c=r.slice();while(c.length<head.length)c.push('');return c}),t=detect(head,data);
+ $('mapList').innerHTML='';
+ head.forEach(function(h,i){var d=document.createElement('div'),sp=document.createElement('span'),se=document.createElement('select');sp.textContent=h||'(no name)';sp.title=h;
+  [['text','leave alone'],['phone','phone'],['email','email']].forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];if(t[i]==o[0])op.selected=true;se.appendChild(op)});
+  se.setAttribute('aria-label','column type for '+(h||'column '+(i+1)));d.appendChild(sp);d.appendChild(se);$('mapList').appendChild(d)});
+ $('map').style.display='block';
+}
+function getCC(){var v=$('ccSel').value;return v=='other'?($('cc').value||'+'):v}
+$('ccSel').onchange=function(){$('cc').style.display=this.value=='other'?'inline-block':'none'};
+function load(f){
+ if(!f)return;fname=f.name.replace(/\.[^.]+$/,'')+'-clean.csv';
+ var r=new FileReader(),isX=/\.(xlsx|xls)$/i.test(f.name);
+ if(isX){
+  if(typeof XLSX==='undefined'){$('drop').querySelector('b').textContent='excel support needs an internet connection';$('drop').querySelector('span').textContent='or save the sheet as csv and drop that in';return}
+  r.onload=function(){try{var wb=XLSX.read(r.result,{type:'array'}),ws=wb.Sheets[wb.SheetNames[0]];
+   raw=XLSX.utils.sheet_to_json(ws,{header:1,raw:false,defval:''}).map(function(x){return x.map(function(v){return String(v==null?'':v)})});
+   var w=raw.reduce(function(m,x){return Math.max(m,x.length)},0);raw=raw.map(function(x){while(x.length<w)x.push('');return x});
+   ready(f,'sheet "'+wb.SheetNames[0]+'"'+(wb.SheetNames.length>1?', first of '+wb.SheetNames.length+' sheets':''))}catch(e){raw=null;$('drop').querySelector('b').textContent='could not read that excel file';$('drop').querySelector('span').textContent='try saving it as csv'}};
+  r.readAsArrayBuffer(f);
+ }else{
+  r.onload=function(){var t=r.result,d=sniff(t);raw=parse(t,d);ready(f,d==';'?'semicolon-separated':d=='\t'?'tab-separated':'')};
+  r.readAsText(f);
+ }
+}
+$('file').onchange=function(){load(this.files[0])};
+var dz=$('drop');
+['dragover','dragenter'].forEach(function(e){dz.addEventListener(e,function(ev){ev.preventDefault();dz.classList.add('over')})});
+['dragleave','drop'].forEach(function(e){dz.addEventListener(e,function(){dz.classList.remove('over')})});
+dz.addEventListener('drop',function(ev){ev.preventDefault();load(ev.dataTransfer.files[0])});
+
+$('go').onclick=function(){
+ if(!raw)return;
+ var o={trim:$('oTrim').checked,blank:$('oBlank').checked,dup:$('oDup').checked,phone:$('oPhone').checked,mail:$('oMail').checked,cc:getCC(),types:Array.prototype.map.call($('mapList').querySelectorAll('select'),function(x){return x.value})};
+ var copy=raw.map(function(r){return r.slice()}),res=clean(copy,o);out=res.rows;
+ $('rBefore').textContent=res.before;$('rAfter').textContent=res.after;
+ $('rStats').innerHTML=[[res.after-res.flagged,'clean'],[res.flagged,'need review'],[res.dup,'duplicates removed'],[res.blank,'blank rows removed']].map(function(x){return '<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'}).join('');
+ $('rLog').innerHTML=res.log.map(function(l){var d=document.createElement('div');d.textContent=l;return '<li>'+d.innerHTML+'</li>'}).join('');
+ var hasN=out[0][out[0].length-1]=='needs_attention',body=out.slice(1),fl=hasN?body.filter(function(r){return r[r.length-1]}):[],ok=hasN?body.filter(function(r){return !r[r.length-1]}):body;
+ var pv=[out[0]].concat(fl,ok).slice(0,11),h='';
+ pv.forEach(function(r,i){h+='<tr>'+r.map(function(v,ci){var d=document.createElement('div');d.textContent=v;var f=hasN&&i>0&&ci==r.length-1&&v;return (i?'<td'+(f?' class="flag"':'')+'>':'<th>')+d.innerHTML+(i?'</td>':'</th>')}).join('')+'</tr>'});
+ $('pvNote').textContent=fl.length?fl.length+' rows need a look (shown first), then the first rows that were fine:':'preview of the first rows:';
+ $('rTab').innerHTML=h;$('res').style.display='block';$('res').scrollIntoView({behavior:'smooth',block:'start'});
+};
+$('dlx').onclick=function(){
+ if(!out)return;if(typeof XLSX==='undefined'){alert('excel download needs an internet connection. use the csv download instead.');return}
+ var wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(out),'cleaned');XLSX.writeFile(wb,fname.replace(/\.csv$/,'.xlsx'));
+};
+$('dl').onclick=function(){
+ if(!out)return;var b=new Blob(['\uFEFF'+toCsv(out)],{type:'text/csv;charset=utf-8'}),a=document.createElement('a');
+ a.href=URL.createObjectURL(b);a.download=fname;document.body.appendChild(a);a.click();a.remove();
+};
+</script>
+</body>
+</html>
