@@ -22,19 +22,28 @@
 <meta name="twitter:image" content="https://alvinaayaz.github.io/tidy/og-image.png">
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#edf1ee;--ink:#17231c;--soft:#566559;--line:#17231c2e;--card:#f8faf8;--ok:#1f7a4d;--bad:#b3402a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101a14;--ink:#e5efe8;--soft:#93a69a;--line:#e5efe833;--card:#16241c;--ok:#5fd09a;--bad:#ff8a70}}
+:root{--bg:#edf1ee;--ink:#17231c;--soft:#566559;--line:#17231c2e;--card:#f8faf8;--ok:#1f7a4d;--bad:#b3402a;box-sizing:border-box}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101a14;--ink:#e5efe8;--soft:#93a69a;--line:#e5efe833;--card:#16241c;--ok:#5fd09a;--bad:#ff8a70}}
 :root[data-theme="dark"]{--bg:#101a14;--ink:#e5efe8;--soft:#93a69a;--line:#e5efe833;--card:#16241c;--ok:#5fd09a;--bad:#ff8a70}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}*{box-sizing:border-box}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 'Bricolage Grotesque',system-ui,sans-serif}
 main{max-width:820px;margin:0 auto;padding:36px 20px 80px}h1{font:800 clamp(40px,10vw,76px)/.95 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.04em;margin:0 0 10px}
-.sub{color:var(--soft);margin:0 0 26px;max-width:60ch}#drop{display:block;border:2px dashed var(--ink);border-radius:6px;padding:34px 18px;text-align:center;cursor:pointer;background:var(--card)}#drop.over{border-style:solid;background:var(--bg)}#drop:focus-within{outline:2px solid var(--ok);outline-offset:2px}#drop input{position:absolute;opacity:0;width:1px;height:1px}#drop b{font-weight:800;font-size:20px;display:block}#drop span{color:var(--soft)}
+h2{font-size:21px;margin:0 0 5px}.sub{color:var(--soft);margin:0 0 26px;max-width:60ch}
+#drop{display:block;border:2px dashed var(--ink);border-radius:6px;padding:34px 18px;text-align:center;cursor:pointer;background:var(--card)}
+#drop.over{border-style:solid;background:var(--bg)}#drop:focus-within{outline:2px solid var(--ok);outline-offset:2px}
+#drop input{position:absolute;opacity:0;width:1px;height:1px}#drop b{font-weight:800;font-size:20px;display:block}#drop span{color:var(--soft)}
 .opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px 18px;margin:20px 0 6px}.opts label{display:flex;gap:9px;align-items:flex-start}.opts input{margin-top:5px;accent-color:var(--ok)}
 .cc{margin:6px 0 18px;color:var(--soft);font-size:15px}.cc input{width:85px;font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:3px 8px}
-button{font:inherit;font-weight:600;cursor:pointer;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:4px;padding:11px 18px;margin:3px 3px 3px 0}button:focus-visible{outline:2px solid var(--ok);outline-offset:2px}button:disabled{opacity:.4;cursor:not-allowed}
+button{font:inherit;font-weight:600;cursor:pointer;background:var(--ink);color:var(--bg);border:1px solid var(--ink);border-radius:4px;padding:11px 18px;margin:3px 3px 3px 0}
+button:focus-visible{outline:2px solid var(--ok);outline-offset:2px}button:disabled{opacity:.4;cursor:not-allowed}
 #res{display:none;margin-top:30px;border-top:2px solid var(--ink);padding-top:18px}.big{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap}.big b{font:800 clamp(44px,11vw,84px)/1 'Bricolage Grotesque',system-ui,sans-serif;letter-spacing:-.04em}.big i{font-style:normal;color:var(--ok);font-weight:800}.big span{color:var(--soft)}
-ul{margin:12px 0 18px;padding-left:20px}li{margin:3px 0}.tw{overflow-x:auto;border:1px solid var(--line);border-radius:4px;margin-bottom:16px;background:var(--card)}table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}th{background:var(--bg)}td.flag{color:var(--bad)}.note{color:var(--soft);font-size:14px;margin-top:22px}
-.cc select,.maplist select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:4px 8px}.maplist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 18px;margin:8px 0 18px}.maplist div{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding:4px 0}.maplist span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.stats{display:flex;gap:26px;flex-wrap:wrap;margin:16px 0}.stats b{display:block;font-weight:800;font-size:28px;line-height:1.1}.stats span{color:var(--soft);font-size:14px}#status{min-height:1.5em;color:var(--bad);margin:8px 0}.small{font-size:13px;color:var(--soft)}
+ul{margin:12px 0 18px;padding-left:20px}li{margin:3px 0}.tw{overflow-x:auto;border:1px solid var(--line);border-radius:4px;margin-bottom:16px;background:var(--card)}
+table{border-collapse:collapse;width:100%;font-size:14px}th,td{padding:7px 10px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}th{background:var(--bg)}td.flag{color:var(--bad)}
+.note{color:var(--soft);font-size:14px;margin-top:22px}.cc select,.maplist select{font:inherit;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:4px;padding:4px 8px}
+.maplist{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:8px 18px;margin:8px 0 18px}.maplist div{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding:4px 0}
+.maplist span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.stats{display:flex;gap:26px;flex-wrap:wrap;margin:16px 0}.stats b{display:block;font-weight:800;font-size:28px;line-height:1.1}.stats span{color:var(--soft);font-size:14px}
+#status{min-height:1.5em;color:var(--bad);margin:8px 0}.small{font-size:13px;color:var(--soft)}.hint{font-size:13px;color:var(--soft);margin:5px 0 12px}
+@media(max-width:520px){main{padding:26px 15px 60px}.big{gap:9px}.big b{font-size:48px}}
 </style>
 </head>
 <body>
@@ -42,103 +51,299 @@ ul{margin:12px 0 18px;padding-left:20px}li{margin:3px 0}.tw{overflow-x:auto;bord
 <h1>tidy.</h1>
 <p class="sub">drop in a messy csv or excel sheet. clean the parts that need fixing, review what changed, then download your file. your spreadsheet data is processed in your browser. reads csv (comma, semicolon or tab) and excel.</p>
 <label id="drop"><input type="file" id="file" accept=".csv,.tsv,.txt,.xlsx,.xls,text/csv"><b>choose a csv or excel file</b><span>or drag it here · up to 50 MB</span></label>
-<p id="status" role="alert"></p>
+<p id="status" role="alert" aria-live="polite"></p>
 <div class="opts">
 <label><input type="checkbox" id="oTrim" checked> trim extra spaces and collapse doubles</label>
 <label><input type="checkbox" id="oBlank" checked> remove completely blank rows</label>
-<label><input type="checkbox" id="oDup" checked> remove duplicate rows (ignores upper/lower case)</label>
+<label><input type="checkbox" id="oDup" checked> remove duplicate rows (ignores upper/lower case and extra spaces)</label>
 <label><input type="checkbox" id="oPhone" checked> standardize phone numbers (in columns marked phone)</label>
 <label><input type="checkbox" id="oMail" checked> lowercase emails and flag invalid formats (in columns marked email)</label>
 </div>
 <div id="map" style="display:none"><h2>columns</h2><p class="cc">we guessed what each column is. fix any that are wrong.</p><div id="mapList" class="maplist"></div></div>
-<p class="cc">country for numbers that start with 0: <select id="ccSel" aria-label="country"><option value="+92">Pakistan +92</option><option value="+91">India +91</option><option value="+880">Bangladesh +880</option><option value="+44">United Kingdom +44</option><option value="+1">US / Canada +1</option><option value="+971">UAE +971</option><option value="+966">Saudi Arabia +966</option><option value="+61">Australia +61</option><option value="+49">Germany +49</option><option value="+90">Turkey +90</option><option value="+234">Nigeria +234</option><option value="other">other…</option></select> <input id="cc" value="+" style="display:none" aria-label="country code"></p>
+<p class="cc">country for numbers that start with 0: <select id="ccSel" aria-label="country">
+<option value="+92">Pakistan +92</option><option value="+91">India +91</option><option value="+880">Bangladesh +880</option><option value="+44">United Kingdom +44</option><option value="+1">US / Canada +1</option><option value="+971">UAE +971</option><option value="+966">Saudi Arabia +966</option><option value="+61">Australia +61</option><option value="+49">Germany +49</option><option value="+90">Turkey +90</option><option value="+234">Nigeria +234</option><option value="other">other…</option></select> <input id="cc" value="+" style="display:none" aria-label="country code"></p>
 <button id="go" disabled>clean it</button>
 <div id="res" aria-live="polite">
 <div class="big"><b id="rBefore">0</b><span>rows in</span><i>→</i><b id="rAfter">0</b><span>rows out</span></div>
 <div class="stats" id="rStats"></div><ul id="rLog"></ul>
 <p class="note" id="pvNote"></p><div class="tw"><table id="rTab"></table></div>
 <button id="dl">download cleaned csv</button> <button id="dlx" style="background:transparent;color:var(--ink)">download as excel</button> <button id="dlReport" style="background:transparent;color:var(--ink)">download change report</button>
-<p class="note">rows with a problem we can't confidently fix stay in the file and get a note in a new attention column. blank and exact duplicate rows are removed only when those options are selected. phone checks are cautious format checks, not proof that a number is active.</p>
+<p class="note">rows with a problem we can't confidently fix stay in the file and get a note in a new attention column. blank and duplicate rows are removed only when those options are selected. phone checks are cautious format checks, not proof that a number is active.</p>
 <p class="small" id="reportNote"></p>
 </div>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <script>
 'use strict';
-var raw=null,out=null,changeReport=[],fname='data-clean.csv',MAX_FILE=50*1024*1024,$=function(i){return document.getElementById(i)};
+var raw=null,out=null,changeReport=[],fname='data-clean.csv',MAX_FILE=50*1024*1024;
+var $=function(id){return document.getElementById(id)};
 function setStatus(s){$('status').textContent=s||''}
-function parse(t,dl){
- dl=dl||',';t=t.replace(/^\uFEFF/,'');var rows=[],row=[],f='',quoted=false,afterQuote=false,i=0,c,recordStart=1;
- for(;i<t.length;i++){c=t[i];
-  if(quoted){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else{quoted=false;afterQuote=true}}else f+=c;continue}
-  if(afterQuote){if(c===dl){row.push(f);f='';afterQuote=false;continue}if(c==='\n'||c==='\r'){row.push(f);rows.push(row);row=[];f='';afterQuote=false;if(c==='\r'&&t[i+1]==='\n')i++;recordStart=i+2;continue}if(c===' '||c==='\t'){continue}throw new Error('Unexpected character after a closing quote near line '+recordStart+'. Check the CSV quoting.');}
-  if(c==='"'){if(f!=='')throw new Error('A quote appeared in the middle of an unquoted cell near line '+recordStart+'. Check the CSV quoting.');quoted=true}
-  else if(c===dl){row.push(f);f=''}
-  else if(c==='\n'||c==='\r'){row.push(f);rows.push(row);row=[];f='';if(c==='\r'&&t[i+1]==='\n')i++;recordStart=i+2}
-  else f+=c;
+function parseDelimited(text,delimiter){
+ text=String(text).replace(/^\uFEFF/,'');var rows=[],row=[],field='',quoted=false,afterQuote=false,line=1;
+ for(var i=0;i<text.length;i++){
+  var c=text[i];
+  if(quoted){if(c==='"'){if(text[i+1]==='"'){field+='"';i++}else{quoted=false;afterQuote=true}}else{field+=c;if(c==='\n')line++}continue}
+  if(afterQuote){
+   if(c===delimiter){row.push(field);field='';afterQuote=false;continue}
+   if(c==='\r'||c==='\n'){row.push(field);rows.push(row);row=[];field='';afterQuote=false;if(c==='\r'&&text[i+1]==='\n')i++;line++;continue}
+   if(c===' '||c==='\t')continue;
+   throw new Error('Unexpected character after a closing quote near line '+line+'. Check the CSV quoting.');
+  }
+  if(c==='"'){if(field!=='')throw new Error('A quote appeared in the middle of an unquoted cell near line '+line+'. Check the CSV quoting.');quoted=true}
+  else if(c===delimiter){row.push(field);field=''}
+  else if(c==='\r'||c==='\n'){row.push(field);rows.push(row);row=[];field='';if(c==='\r'&&text[i+1]==='\n')i++;line++}
+  else field+=c;
  }
  if(quoted)throw new Error('The file ends inside a quoted cell. Check the CSV quoting.');
- if(afterQuote||f!==''||row.length){row.push(f);rows.push(row)}
- while(rows.length&&rows[rows.length-1].every(function(v){return v===''}))rows.pop();
+ if(afterQuote||field!==''||row.length){row.push(field);rows.push(row)}
+ while(rows.length&&rows[rows.length-1].every(function(v){return v==='' }))rows.pop();
  return rows;
 }
-function countDelimiters(text,delimiter){var q=false,n=0;for(var i=0;i<text.length;i++){var c=text[i];if(c==='"'){if(q&&text[i+1]==='"'){i++;continue}q=!q}else if(!q&&c===delimiter)n++}return n}
-function sniff(t){var sample=t.slice(0,20000),candidates=[',',';','\t'],best=',',score=-1; candidates.forEach(function(d){var count=countDelimiters(sample,d);if(count>score){score=count;best=d}});return best}
-function csvSafe(v){v=String(v==null?'':v);var signedNumber=v===v.trim()&&/^[+-]?(?:\d+(?:[.,]\d*)?|[.,]\d+)$/.test(v);if((/^[\s\u0000-\u001f]*[=+@-]/.test(v)||/^[\t\r]/.test(v))&&!signedNumber)v="'"+v;return v}
-function esc(v){v=csvSafe(v);return /[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
-function toCsv(rows){return rows.map(function(r){return r.map(esc).join(',')}).join('\r\n')}
+function delimiterScore(text,delimiter){
+ try{
+  var rows=parseDelimited(text.slice(0,Math.min(text.length,50000)),delimiter).filter(function(r){return r.some(function(v){return v.trim()!==''})}).slice(0,30);
+  if(rows.length<2)return {score:0,count:0};
+  var counts=rows.map(function(r){return r.length}),freq={};counts.forEach(function(n){freq[n]=(freq[n]||0)+1});
+  var best=0,mode=0;Object.keys(freq).forEach(function(k){if(freq[k]>best){best=freq[k];mode=Number(k)}});
+  if(mode<2)return {score:0,count:mode};
+  var consistency=best/counts.length,spread=counts.reduce(function(s,n){return s+Math.abs(n-mode)},0)/counts.length;
+  return {score:consistency*100+mode*2-spread*5,count:mode};
+ }catch(e){return {score:-1,count:0}}
+}
+function sniff(text){
+ var sample=String(text).slice(0,50000),candidates=[',',';','\t'],best=',',bestScore=-Infinity;
+ candidates.forEach(function(d){var s=delimiterScore(sample,d);if(s.score>bestScore){bestScore=s.score;best=d}});
+ return best;
+}
+function csvSafe(value){
+ var s=String(value==null?'':value),trimmed=s.replace(/^[\u0000-\u0020\uFEFF]+/,'');
+ var numeric=/^[+-]?(?:\d+(?:[.,]\d*)?|[.,]\d+)$/.test(s.trim());
+ if(!numeric&&(/^[=+@-]/.test(trimmed)||/^[\t\r]/.test(s)||/^[\u0000-\u001f]/.test(s)))return "'"+s;
+ return s;
+}
+function csvEscape(value){var s=csvSafe(value);return /[",\r\n]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+function toCsv(rows){return rows.map(function(r){return r.map(csvEscape).join(',')}).join('\r\n')}
 function uniqueHeader(base,head){var name=base,n=2;while(head.some(function(h){return String(h).toLowerCase()===name.toLowerCase()})){name=base+'_'+n++}return name}
-function detect(head,data){return head.map(function(h,i){if(/e-?mail/i.test(h))return 'email';var vals=data.map(function(r){return r[i]||''}).filter(Boolean);if(!vals.length)return 'text';var ph=vals.filter(function(v){var n=v.replace(/\D/g,'').length;return n>=7&&n<=15&&/^[+\d\s()\-.\/]+$/.test(v)}).length;if(/phone|mobile|\btel\b|contact|cell|whatsapp/i.test(h)&&vals.filter(function(v){return v.replace(/\D/g,'').length>=7}).length/vals.length>=.5)return 'phone';if(!/\bid\b|zip|postal|code|ref|invoice|amount|price|qty|total|rating|date/i.test(h)&&vals.length>=2&&ph/vals.length>=.8)return 'phone';return 'text'})}
-function addChange(list,row,col,oldVal,newVal,action){list.push({row:row,column:col,original:oldVal,cleaned:newVal,action:action})}
-function clean(rows,o){
- var log=[],changes=[],head=rows[0].map(function(v){return String(v==null?'':v)}),data=rows.slice(1).map(function(r){return r.map(function(v){return String(v==null?'':v)})}),sourceRows=data.map(function(_,i){return i+2}),before=data.length,nBlank=0,nDup=0,originalWidth=head.length;
- var width=Math.max(originalWidth,data.reduce(function(m,r){return Math.max(m,r.length)},originalWidth));
+function detect(head,data){
+ return head.map(function(h,i){
+  var name=String(h||'');
+  if(/e[\s_-]?mail/i.test(name))return 'email';
+  if(/phone|mobile|\btel\b|cell|whatsapp/i.test(name))return 'phone';
+  if(/\bcontact\b/i.test(name)){
+   var vals=data.map(function(r){return String(r[i]||'')}).filter(Boolean);
+   if(vals.length&&vals.filter(function(v){return /^[+\d\s()./-]+$/.test(v)&&v.replace(/\D/g,'').length>=7}).length/vals.length>=.5)return 'phone';
+  }
+  var vals=data.map(function(r){return String(r[i]||'')}).filter(Boolean);
+  if(!vals.length)return 'text';
+  if(!/\bid\b|zip|postal|code|ref|invoice|amount|price|qty|total|rating|date|website|url/i.test(name)&&vals.length>=2){
+   var phoneLike=vals.filter(function(v){return /^[+\d\s()./-]+$/.test(v)&&v.replace(/\D/g,'').length>=7&&v.replace(/\D/g,'').length<=15}).length;
+   if(phoneLike/vals.length>=.8)return 'phone';
+  }
+  return 'text';
+ });
+}
+function addChange(list,row,column,original,cleaned,action){list.push({row:row,column:column,original:original,cleaned:cleaned,action:action})}
+function normalizePhone(value,countryCode){
+ var original=String(value||'').trim();
+ if(!original)return {ok:true,value:original,changed:false};
+ if(!/^[+\d\s()./-]+$/.test(original)||!/[0-9]/.test(original))return {ok:false,reason:'not a simple phone number'};
+ if(/(?:\/|,|;|\bor\b)\s*[+(\d]/i.test(original))return {ok:false,reason:'multiple numbers in one cell'};
+ var compact=original.replace(/[\s()./-]/g,'');
+ if(compact.indexOf('00')===0)compact='+'+compact.slice(2);
+ var digits=compact.replace(/\D/g,''),normalized=compact;
+ if(compact.charAt(0)==='+'){
+  if(digits.length<7||digits.length>15)return {ok:false,reason:'check phone length'};
+  normalized='+'+digits;
+ }else if(compact.charAt(0)==='0'){
+  var cc=String(countryCode||'').replace(/\D/g,'');
+  if(!cc||cc.length>4)return {ok:false,reason:'check country code'};
+  normalized='+'+cc+digits.slice(1);digits=normalized.replace(/\D/g,'');
+ }else{
+  var selected=String(countryCode||'').replace(/\D/g,'');
+  if(selected&&digits.indexOf(selected)===0&&digits.length>=7)normalized='+'+digits;
+  else if(selected==='92'&&digits.length===10&&digits.charAt(0)==='3')normalized='+92'+digits;
+  else return {ok:false,reason:'phone needs a country code or leading 0'};
+ }
+ digits=normalized.replace(/\D/g,'');
+ if(digits.length<7||digits.length>15)return {ok:false,reason:'check phone length'};
+ if(normalized.indexOf('+92')===0&&digits.length!==12)return {ok:false,reason:'check Pakistan phone length'};
+ return {ok:true,value:normalized,changed:normalized!==original};
+}
+function validEmail(value){
+ if(value.length>254||/\s/.test(value))return false;
+ var at=value.indexOf('@');if(at<=0||at!==value.lastIndexOf('@'))return false;
+ var local=value.slice(0,at),domain=value.slice(at+1);
+ if(local.length>64||!domain||domain.length>253||local.charAt(0)==='.'||local.charAt(local.length-1)==='.'||local.indexOf('..')!==-1)return false;
+ if(!/^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+$/.test(local))return false;
+ var labels=domain.split('.');
+ if(labels.length<2||labels.some(function(x){return !x||x.length>63||x.charAt(0)==='-'||x.charAt(x.length-1)==='-'||!/^[A-Za-z0-9-]+$/.test(x)}))return false;
+ return /^[A-Za-z]{2,}$/.test(labels[labels.length-1]);
+}
+function clean(rows,options){
+ if(!rows||!rows.length)throw new Error('The file has no rows to clean.');
+ var log=[],changes=[],head=rows[0].map(function(v){return String(v==null?'':v)}),data=rows.slice(1).map(function(r){return r.map(function(v){return String(v==null?'':v)})});
+ var sourceRows=data.map(function(_,i){return i+2}),before=data.length,nBlank=0,nDup=0;
+ var width=Math.max(head.length,data.reduce(function(m,r){return Math.max(m,r.length)},head.length));
+ if(!width)throw new Error('The file has no columns.');
  while(head.length<width)head.push('column_'+(head.length+1));
  data.forEach(function(r){while(r.length<width)r.push('')});
- if(o.trim){var n=0;data.forEach(function(r,ri){r.forEach(function(v,ci){var t=v.replace(/\s+/g,' ').trim();if(t!==v){addChange(changes,sourceRows[ri],head[ci],v,t,'trimmed whitespace');r[ci]=t;n++}})});if(n)log.push('trimmed spaces in '+n+' cells')}
- if(o.blank){var kept=[],keptSource=[];data.forEach(function(r,ri){if(r.some(function(v){return v.trim()!==''})){kept.push(r);keptSource.push(sourceRows[ri])}else{nBlank++;addChange(changes,sourceRows[ri],'(entire row)',r.join(' | '),'','removed blank row')}});data=kept;sourceRows=keptSource;if(nBlank)log.push('removed '+nBlank+' blank rows')}
- var types=o.types||detect(head,data),phoneCols=[],mailCols=[];types.forEach(function(t,i){if(t==='phone')phoneCols.push(i);if(t==='email')mailCols.push(i)});
- var issues=data.map(function(){return[]});
- if(o.phone&&phoneCols.length){var fixed=0,bad=0,cc=o.cc.replace(/\D/g,'');
-  data.forEach(function(r,ri){phoneCols.forEach(function(ci){var v=r[ci]||'';if(!v)return;var suffix=phoneCols.length>1?' ('+head[ci]+')':'';
-   if(!/^[+\d\s().\-/]+$/.test(v)||!/[0-9]/.test(v)){issues[ri].push('not a simple phone number'+suffix);bad++;return}
-   if(/(?:\/|,|;|\bor\b)\s*[+(\d]/i.test(v)){issues[ri].push('multiple numbers in one cell'+suffix);bad++;return}
-   var d=v.replace(/[\s().\-/]/g,'');if(d.indexOf('00')===0)d='+'+d.slice(2);var digits=d.replace(/\D/g,'');
-   if(d.charAt(0)==='+'){if(digits.length<8||digits.length>15){issues[ri].push('check phone length'+suffix);bad++;return}}
-   else if(digits.charAt(0)==='0'){if(cc.length<1||cc.length>4){issues[ri].push('check country code'+suffix);bad++;return}d='+'+cc+digits.slice(1);digits=d.replace(/\D/g,'')}
-   else if(cc&&digits.indexOf(cc)===0&&digits.length>=10){d='+'+digits}
-   else if(cc==='92'&&digits.length===10&&digits.charAt(0)==='3'){d='+92'+digits;digits=d.replace(/\D/g,'')}
-   else{issues[ri].push('phone needs a country code or leading 0'+suffix);bad++;return}
-   if(digits.length<8||digits.length>15||(d.indexOf('+92')===0&&digits.length!==12)){issues[ri].push('check phone length'+suffix);bad++;return}
-   if(d!==v){r[ci]=d;addChange(changes,sourceRows[ri],head[ci],v,d,'standardized phone');fixed++}
-  })});log.push('standardized '+fixed+' phone numbers'+(bad?'; flagged '+bad+' numbers to check':''))
- }else if(o.phone)log.push('no column is set to phone');
- if(o.mail&&mailCols.length){var lc=0,inv=0;data.forEach(function(r,ri){mailCols.forEach(function(ci){var v=r[ci]||'';if(!v)return;var l=v.toLowerCase();if(l!==v){r[ci]=l;addChange(changes,sourceRows[ri],head[ci],v,l,'lowercased email');lc++}if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(l)){issues[ri].push('check email format'+(mailCols.length>1?' ('+head[ci]+')':''));inv++}})});log.push('lowercased '+lc+' emails'+(inv?'; flagged '+inv+' email formats to check':''))}
- else if(o.mail)log.push('no column is set to email');
- if(o.dup){var seen=new Set(),keep=[],ki=[],keepSource=[];data.forEach(function(r,ri){var key=JSON.stringify(r.map(function(v){return v.toLowerCase()}));if(seen.has(key)){nDup++;addChange(changes,sourceRows[ri],'(entire row)',r.join(' | '),'','removed duplicate row')}else{seen.add(key);keep.push(r);ki.push(issues[ri]);keepSource.push(sourceRows[ri])}});data=keep;issues=ki;sourceRows=keepSource;if(nDup)log.push('removed '+nDup+' duplicate rows')}
- var flagged=issues.filter(function(x){return x.length}).length,attentionIndex=-1;
- if(flagged){var attentionName=uniqueHeader('needs_attention',head);attentionIndex=head.length;head.push(attentionName);data.forEach(function(r,i){var issueText=issues[i].join('; ');r.push(issueText);if(issueText)addChange(changes,sourceRows[i],attentionName,r.slice(0,-1).join(' | '),issueText,'flagged for review')});log.push('added '+attentionName+' column for '+flagged+' rows that need review')}
+ if(options.trim){
+  var trimmed=0;
+  data.forEach(function(r,ri){r.forEach(function(v,ci){var next=v.replace(/\s+/g,' ').trim();if(next!==v){addChange(changes,sourceRows[ri],head[ci],v,next,'trimmed whitespace');r[ci]=next;trimmed++}})});
+  if(trimmed)log.push('trimmed spaces in '+trimmed+' cells');
+ }
+ if(options.blank){
+  var kept=[],keptRows=[];
+  data.forEach(function(r,i){if(r.some(function(v){return v.trim()!==''})){kept.push(r);keptRows.push(sourceRows[i])}else{nBlank++;addChange(changes,sourceRows[i],'(entire row)',JSON.stringify(r),'','removed blank row')}});
+  data=kept;sourceRows=keptRows;if(nBlank)log.push('removed '+nBlank+' blank rows');
+ }
+ var types=options.types||detect(head,data),phoneCols=[],emailCols=[];
+ types.forEach(function(t,i){if(t==='phone')phoneCols.push(i);if(t==='email')emailCols.push(i)});
+ var issues=data.map(function(){return []});
+ if(options.phone){
+  if(!phoneCols.length)log.push('no column is set to phone');
+  else{
+   var fixed=0,bad=0;
+   data.forEach(function(r,ri){phoneCols.forEach(function(ci){
+    var old=r[ci];if(!old)return;var result=normalizePhone(old,options.cc);
+    if(!result.ok){issues[ri].push({column:ci,message:result.reason});bad++;return}
+    if(result.changed){r[ci]=result.value;addChange(changes,sourceRows[ri],head[ci],old,result.value,'standardized phone');fixed++}
+   })});
+   log.push('standardized '+fixed+' phone numbers'+(bad?'; flagged '+bad+' numbers to check':''));
+  }
+ }
+ if(options.mail){
+  if(!emailCols.length)log.push('no column is set to email');
+  else{
+   var lowered=0,invalid=0;
+   data.forEach(function(r,ri){emailCols.forEach(function(ci){
+    var old=r[ci];if(!old)return;var next=old.toLowerCase();
+    if(next!==old){r[ci]=next;addChange(changes,sourceRows[ri],head[ci],old,next,'lowercased email');lowered++}
+    if(!validEmail(next)){issues[ri].push({column:ci,message:'check email format'});invalid++;
+     addChange(changes,sourceRows[ri],head[ci],old,next,'flagged email for review');
+    }
+   })});
+   log.push('lowercased '+lowered+' emails'+(invalid?'; flagged '+invalid+' email formats to check':''));
+  }
+ }
+ if(options.dup){
+  var seen=new Set(),keptRows=[],keptSource=[],keptIssues=[];
+  data.forEach(function(r,ri){
+   var key=JSON.stringify(r.map(function(v){return v.replace(/\s+/g,' ').trim().toLocaleLowerCase()}));
+   if(seen.has(key)){nDup++;addChange(changes,sourceRows[ri],'(entire row)',JSON.stringify(r),'','removed duplicate row')}
+   else{seen.add(key);keptRows.push(r);keptSource.push(sourceRows[ri]);keptIssues.push(issues[ri])}
+  });
+  data=keptRows;sourceRows=keptSource;issues=keptIssues;if(nDup)log.push('removed '+nDup+' duplicate rows');
+ }
+ var flagged=issues.filter(function(a){return a.length>0}).length,attentionIndex=-1;
+ if(flagged){
+  var attention=uniqueHeader('needs_attention',head);attentionIndex=head.length;head.push(attention);
+  data.forEach(function(r,i){
+   var messages=issues[i].map(function(issue){return issue.message+' ('+head[issue.column]+')'});
+   var message=messages.join('; ');r.push(message);
+   if(message)addChange(changes,sourceRows[i],attention,message,message,'row flagged for review');
+  });
+  log.push('added '+attention+' column for '+flagged+' rows that need review');
+ }
  if(!log.length)log.push('nothing needed fixing');
- return{rows:[head].concat(data),log:log,before:before,after:data.length,blank:nBlank,dup:nDup,flagged:flagged,changes:changes,attentionIndex:attentionIndex};
+ return {rows:[head].concat(data),log:log,before:before,after:data.length,blank:nBlank,dup:nDup,flagged:flagged,changes:changes,attentionIndex:attentionIndex};
 }
-function ready(f,info){if(!raw||raw.length<1||!raw[0].length){raw=null;$('drop').querySelector('b').textContent='that file looks empty';$('drop').querySelector('span').textContent='try another one';$('go').disabled=true;return} $('drop').querySelector('b').textContent=f.name;$('drop').querySelector('span').textContent=(raw.length-1)+' rows, '+raw[0].length+' columns'+(info?' ('+info+')':'');$('go').disabled=raw.length<2;$('res').style.display='none';buildMap()}
-function buildMap(){if(!raw||raw.length<2){$('map').style.display='none';return}var head=raw[0],data=raw.slice(1),t=detect(head,data);$('mapList').innerHTML='';head.forEach(function(h,i){var d=document.createElement('div'),sp=document.createElement('span'),se=document.createElement('select');sp.textContent=h||'(no name)';sp.title=h;[['text','leave alone'],['phone','phone'],['email','email']].forEach(function(o){var op=document.createElement('option');op.value=o[0];op.textContent=o[1];if(t[i]===o[0])op.selected=true;se.appendChild(op)});se.setAttribute('aria-label','column type for '+(h||'column '+(i+1)));d.appendChild(sp);d.appendChild(se);$('mapList').appendChild(d)});$('map').style.display='block'}
-function getCC(){var v=$('ccSel').value;return v==='other'?($('cc').value||'+'):v}$('ccSel').onchange=function(){$('cc').style.display=this.value==='other'?'inline-block':'none'};
-function load(f){if(!f)return;setStatus('');if(f.size>MAX_FILE){setStatus('That file is larger than 50 MB. Try a smaller file or split it into parts.');return}fname=f.name.replace(/\.[^.]+$/,'')+'-clean.csv';raw=null;out=null;changeReport=[];$('go').disabled=true;$('res').style.display='none';var r=new FileReader(),isX=/\.(xlsx|xls)$/i.test(f.name);
- r.onerror=function(){setStatus('The file could not be read. Try again or save it in another format.');$('drop').querySelector('b').textContent='could not read that file'};
- if(isX){if(typeof XLSX==='undefined'){setStatus('Excel support needs an internet connection. Save the sheet as CSV and try again.');return}r.onload=function(){try{var wb=XLSX.read(r.result,{type:'array'});if(!wb.SheetNames.length)throw new Error('No worksheet found');var ws=wb.Sheets[wb.SheetNames[0]];raw=XLSX.utils.sheet_to_json(ws,{header:1,raw:false,defval:''}).map(function(x){return x.map(function(v){return String(v==null?'':v)})});var w=raw.reduce(function(m,x){return Math.max(m,x.length)},0);raw=raw.map(function(x){while(x.length<w)x.push('');return x});ready(f,'sheet "'+wb.SheetNames[0]+'"'+(wb.SheetNames.length>1?', first of '+wb.SheetNames.length+' sheets':''))}catch(e){raw=null;setStatus('Could not read that Excel file: '+e.message);$('drop').querySelector('b').textContent='could not read that excel file'}};r.readAsArrayBuffer(f)}
- else{r.onload=function(){try{var t=r.result,d=sniff(t);raw=parse(t,d);ready(f,d===';'?'semicolon-separated':d==='\t'?'tab-separated':'comma-separated')}catch(e){raw=null;setStatus(e.message);$('drop').querySelector('b').textContent='could not read that CSV';$('drop').querySelector('span').textContent='check the file format and try again'}};r.readAsText(f)}
+function resetFileLabel(){ $('drop').querySelector('b').textContent='choose a csv or excel file';$('drop').querySelector('span').textContent='or drag it here · up to 50 MB'}
+function ready(file,info){
+ if(!raw||!raw.length||!raw[0]||!raw[0].length){raw=null;setStatus('That file looks empty or has no header row.');resetFileLabel();$('go').disabled=true;return}
+ $('drop').querySelector('b').textContent=file.name;
+ $('drop').querySelector('span').textContent=Math.max(0,raw.length-1)+' rows, '+raw[0].length+' columns'+(info?' ('+info+')':'');
+ $('go').disabled=raw.length<2;$('res').style.display='none';buildMap();
 }
-$('file').onchange=function(){load(this.files[0])};var dz=$('drop');['dragover','dragenter'].forEach(function(e){dz.addEventListener(e,function(ev){ev.preventDefault();dz.classList.add('over')})});['dragleave','drop'].forEach(function(e){dz.addEventListener(e,function(){dz.classList.remove('over')})});dz.addEventListener('drop',function(ev){ev.preventDefault();load(ev.dataTransfer.files[0])});
-function cellText(v){return String(v==null?'':v)}
-$('go').onclick=function(){if(!raw)return;try{var o={trim:$('oTrim').checked,blank:$('oBlank').checked,dup:$('oDup').checked,phone:$('oPhone').checked,mail:$('oMail').checked,cc:getCC(),types:Array.prototype.map.call($('mapList').querySelectorAll('select'),function(x){return x.value})};var copy=raw.map(function(r){return r.slice()}),res=clean(copy,o);out=res.rows;changeReport=res.changes;
- $('rBefore').textContent=res.before;$('rAfter').textContent=res.after;$('rStats').innerHTML=[[res.after-res.flagged,'clean'],[res.flagged,'need review'],[res.dup,'duplicates removed'],[res.blank,'blank rows removed']].map(function(x){return '<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>'}).join('');$('rLog').innerHTML='';res.log.forEach(function(l){var li=document.createElement('li');li.textContent=l;$('rLog').appendChild(li)});
- var body=out.slice(1),fl=res.attentionIndex>=0?body.filter(function(r){return !!r[res.attentionIndex]}):[],ok=res.attentionIndex>=0?body.filter(function(r){return !r[res.attentionIndex]}):body,pv=[out[0]].concat(fl,ok).slice(0,11),h='';pv.forEach(function(r,i){h+='<tr>';r.forEach(function(v,ci){var d=document.createElement('div');d.textContent=cellText(v);var flagged=res.attentionIndex>=0&&i>0&&ci===res.attentionIndex&&v;h+=(i?'<td'+(flagged?' class="flag"':'')+'>':'<th>')+d.innerHTML+(i?'</td>':'</th>')});h+='</tr>'});$('pvNote').textContent=fl.length?fl.length+' rows need a look (shown first), then rows that were fine:':'preview of the first rows:';$('rTab').innerHTML=h;$('reportNote').textContent=changeReport.length?changeReport.length+' individual changes or removed rows are included in the change report.':'No individual changes were needed.';$('res').style.display='block';$('res').scrollIntoView({behavior:'smooth',block:'start'});
- }catch(e){setStatus('Cleaning stopped because of an unexpected issue: '+e.message)}};
-function downloadBlob(blob,name){var url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1000)}
+function buildMap(){
+ if(!raw||raw.length<2){$('map').style.display='none';return}
+ var headers=raw[0],data=raw.slice(1),types=detect(headers,data);$('mapList').textContent='';
+ headers.forEach(function(header,index){
+  var wrapper=document.createElement('div'),name=document.createElement('span'),select=document.createElement('select');
+  name.textContent=header||'(no name)';name.title=header;
+  [['text','leave alone'],['phone','phone'],['email','email']].forEach(function(item){var option=document.createElement('option');option.value=item[0];option.textContent=item[1];option.selected=types[index]===item[0];select.appendChild(option)});
+  select.setAttribute('aria-label','column type for '+(header||'column '+(index+1)));wrapper.appendChild(name);wrapper.appendChild(select);$('mapList').appendChild(wrapper);
+ });
+ $('map').style.display='block';
+}
+function getCountryCode(){var value=$('ccSel').value;return value==='other'?$('cc').value:value}
+$('ccSel').onchange=function(){$('cc').style.display=this.value==='other'?'inline-block':'none'};
+function load(file){
+ if(!file)return;setStatus('');
+ if(file.size>MAX_FILE){setStatus('That file is larger than 50 MB. Try a smaller file or split it into parts.');return}
+ raw=null;out=null;changeReport=[];$('go').disabled=true;$('res').style.display='none';$('map').style.display='none';
+ fname=file.name.replace(/\.[^.]+$/,'')+'-clean.csv';
+ var reader=new FileReader(),isExcel=/\.(xlsx|xls)$/i.test(file.name);
+ reader.onerror=function(){setStatus('The file could not be read. Try again or save it in another format.');resetFileLabel()};
+ if(isExcel){
+  if(typeof XLSX==='undefined'){setStatus('Excel support needs an internet connection. Save the sheet as CSV and try again.');return}
+  reader.onload=function(){try{
+   var workbook=XLSX.read(reader.result,{type:'array',cellDates:false});
+   if(!workbook.SheetNames.length)throw new Error('No worksheet found.');
+   var sheet=workbook.Sheets[workbook.SheetNames[0]];
+   raw=XLSX.utils.sheet_to_json(sheet,{header:1,raw:false,defval:''}).map(function(row){return row.map(function(v){return String(v==null?'':v)})});
+   var width=raw.reduce(function(m,row){return Math.max(m,row.length)},0);raw=raw.map(function(row){while(row.length<width)row.push('');return row});
+   ready(file,'sheet "'+workbook.SheetNames[0]+'"'+(workbook.SheetNames.length>1?', first of '+workbook.SheetNames.length+' sheets':''));
+  }catch(error){raw=null;setStatus('Could not read that Excel file: '+error.message);resetFileLabel()}};
+  reader.readAsArrayBuffer(file);
+ }else{
+  reader.onload=function(){try{
+   var text=reader.result,delimiter=sniff(text);raw=parseDelimited(text,delimiter);
+   ready(file,delimiter===';'?'semicolon-separated':delimiter==='\t'?'tab-separated':'comma-separated');
+  }catch(error){raw=null;setStatus(error.message);resetFileLabel()}};
+  reader.readAsText(file);
+ }
+}
+$('file').onchange=function(){load(this.files[0]);this.value=''};
+var drop=$('drop');
+['dragover','dragenter'].forEach(function(type){drop.addEventListener(type,function(event){event.preventDefault();drop.classList.add('over')})});
+['dragleave','drop'].forEach(function(type){drop.addEventListener(type,function(){drop.classList.remove('over')})});
+drop.addEventListener('drop',function(event){event.preventDefault();if(event.dataTransfer&&event.dataTransfer.files.length)load(event.dataTransfer.files[0])});
+function renderPreview(rows,attentionIndex){
+ var table=$('rTab');table.textContent='';var body=rows.slice(1),flagged=attentionIndex>=0?body.filter(function(row){return !!row[attentionIndex]}):[],cleanRows=attentionIndex>=0?body.filter(function(row){return !row[attentionIndex]}):body;
+ var preview=[rows[0]].concat(flagged,cleanRows).slice(0,11);
+ preview.forEach(function(row,index){
+  var tr=document.createElement('tr');
+  row.forEach(function(value,column){
+   var cell=document.createElement(index===0?'th':'td');cell.textContent=String(value==null?'':value);
+   if(index>0&&attentionIndex===column&&value)cell.className='flag';
+   tr.appendChild(cell);
+  });table.appendChild(tr);
+ });
+ $('pvNote').textContent=flagged.length?flagged.length+' rows need a look (shown first), then rows that were fine:':'preview of the first rows:';
+}
+$('go').onclick=function(){
+ if(!raw)return;
+ try{
+  var options={trim:$('oTrim').checked,blank:$('oBlank').checked,dup:$('oDup').checked,phone:$('oPhone').checked,mail:$('oMail').checked,cc:getCountryCode(),types:Array.prototype.map.call($('mapList').querySelectorAll('select'),function(select){return select.value})};
+  var result=clean(raw.map(function(row){return row.slice()}),options);out=result.rows;changeReport=result.changes;
+  $('rBefore').textContent=result.before;$('rAfter').textContent=result.after;
+  var stats=[['clean',result.after-result.flagged],['need review',result.flagged],['duplicates removed',result.dup],['blank rows removed',result.blank]];
+  $('rStats').textContent='';stats.forEach(function(item){var block=document.createElement('div'),number=document.createElement('b'),label=document.createElement('span');number.textContent=item[1];label.textContent=item[0];block.appendChild(number);block.appendChild(label);$('rStats').appendChild(block)});
+  $('rLog').textContent='';result.log.forEach(function(message){var li=document.createElement('li');li.textContent=message;$('rLog').appendChild(li)});
+  renderPreview(out,result.attentionIndex);
+  $('reportNote').textContent=changeReport.length?changeReport.length+' entries are included in the change report.':'No individual changes were needed.';
+  $('res').style.display='block';$('res').scrollIntoView({behavior:'smooth',block:'start'});
+ }catch(error){setStatus('Cleaning stopped because of an unexpected issue: '+error.message)}
+};
+function downloadBlob(blob,name){
+ var url=URL.createObjectURL(blob),anchor=document.createElement('a');anchor.href=url;anchor.download=name;document.body.appendChild(anchor);anchor.click();anchor.remove();
+ setTimeout(function(){URL.revokeObjectURL(url)},1500);
+}
 $('dl').onclick=function(){if(!out)return;downloadBlob(new Blob(['\uFEFF'+toCsv(out)],{type:'text/csv;charset=utf-8'}),fname)};
-$('dlx').onclick=function(){if(!out)return;if(typeof XLSX==='undefined'){alert('Excel download needs an internet connection. Use the CSV download instead.');return}try{var safe=out.map(function(r){return r.map(csvSafe)}),wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet(safe),'cleaned');XLSX.writeFile(wb,fname.replace(/\.csv$/i,'.xlsx'))}catch(e){alert('Could not create the Excel file. Try the CSV download instead.')}};
-$('dlReport').onclick=function(){if(!out)return;var rows=[['source row','column','action','original value','cleaned value']].concat(changeReport.map(function(c){return[c.row,c.column,c.action,c.original,c.cleaned]}));downloadBlob(new Blob(['\uFEFF'+toCsv(rows)],{type:'text/csv;charset=utf-8'}),fname.replace(/-clean\.csv$/,'')+'-change-report.csv')};
+$('dlx').onclick=function(){
+ if(!out)return;if(typeof XLSX==='undefined'){alert('Excel download needs an internet connection. Use the CSV download instead.');return}
+ try{
+  var safe=out.map(function(row){return row.map(function(value){return csvSafe(value)})});
+  var workbook=XLSX.utils.book_new();XLSX.utils.book_append_sheet(workbook,XLSX.utils.aoa_to_sheet(safe),'cleaned');
+  XLSX.writeFile(workbook,fname.replace(/\.csv$/i,'.xlsx'));
+ }catch(error){alert('Could not create the Excel file. Try the CSV download instead.')}
+};
+$('dlReport').onclick=function(){
+ if(!out)return;
+ var report=[['source row','column','action','original value','cleaned value']].concat(changeReport.map(function(change){return[change.row,change.column,change.action,change.original,change.cleaned]}));
+ downloadBlob(new Blob(['\uFEFF'+toCsv(report)],{type:'text/csv;charset=utf-8'}),fname.replace(/-clean\.csv$/i,'')+'-change-report.csv');
+};
 </script>
 </body>
 </html>
